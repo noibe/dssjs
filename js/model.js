@@ -11,8 +11,8 @@ var propertyModel = [],
 // Macro Object Model
 propertyModel.push(
 	{
-		name: 'background-color',
 		important: true,
+		name: 'background-color',
 		value: 'red'
 	},
 	{
@@ -61,8 +61,8 @@ ruleModel.push(
 		selector: 'body',   // Selector
 		properties: [
 			{
-				name: 'background-color',
 				important: true,
+				name: 'background-color',
 				value: 'red'
 			},
 			{
@@ -114,8 +114,8 @@ scopeModel.push(
 				selector: 'body',
 				properties: [
 					{
-						name: 'background-color',
 						important: true,
+						name: 'background-color',
 						value: 'red'
 					},
 					{
@@ -131,15 +131,15 @@ scopeModel.push(
 styleSheetModel =
 [
 	{
-		selector: 'body',
+		selector: 'selectorOne',
 		properties: [
 			{
-				name: 'background-color',
 				important: true,
+				name: 'selectorOnePropertyTwo',
 				value: 'red'
 			},
 			{
-				name: 'color',
+				name: 'selectorOnePropertyTwo',
 				value: 'blue'
 			}
 		]
@@ -149,7 +149,7 @@ styleSheetModel =
 		features: '(max-width: 600px)',
 		rules: [
 			[
-				'body',
+				'selectorTwo',
 				[
 					[
 						'background-color',
@@ -163,11 +163,11 @@ styleSheetModel =
 				]
 			],
 			{
-				selector: 'body',
+				selector: 'selectorThree',
 				properties: [
 					{
-						name: 'background-color',
 						important: true,
+						name: 'background-color',
 						value: 'red'
 					},
 					{
@@ -179,15 +179,15 @@ styleSheetModel =
 		]
 	},
 	[
-		'body',
+		'selectorFour',
 		[
 			[
-				'background-color',
+				'selectorFourPropertyOne',
 				true,
 				'red'
 			],
 			[
-				'color',
+				'selectorFourPropertyTwo',
 				'blue'
 			]
 		]

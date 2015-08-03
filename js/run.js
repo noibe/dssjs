@@ -4,50 +4,14 @@
  * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
  */
 
-var ruleModel = [];
-
-// Object Model
-ruleModel.push(
-	{
-		selector: 'body',
-		properties: [
-			{
-				name: 'background-color',
-				important: true,
-				value: 'red'
-			},
-			{
-				name: 'color',
-				value: 'blue'
-			}
-		]
-	}
-);
-
-// Array Model
-ruleModel.push(
-	[
-		'body',
-		[
-			[
-				'background-color',
-				true,
-				'red'
-			],
-			[
-				'color',
-				'blue'
-			]
-		]
-	]
-);
-
 var styles = [];
 
-for (var i = ruleModel.length; i--; )
-	styles.push(runRuleModel(ruleModel[i]));
+/*for (var i = ruleModel.length; i--; )
+	styles.push(runRuleModel(ruleModel[i]));*/
 
-addStyle(styles);
+//addStyle(styles);
+//addStyle(styleSheetModel);
+addStyle(ruleModel[1]);
 
 /*
 	InsertRule tests

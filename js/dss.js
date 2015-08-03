@@ -4,26 +4,26 @@
  * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
  */
 
-var runPropertyModel = function(property) {
-	if (property instanceof Array) {
-		var a = {};
-		a.name = property[0];
-		if (property[1] instanceof String) {
-			a.value = property[1];
-			if (property[2]) a.important = true;
-		} else if (property[2] instanceof String) {
-			a.important = true;
-			a.value = property[2];
+var runPropertyModel = function(a) {
+	if (a instanceof Array) {
+		var property = {};
+		property.name = a[0];
+		if (typeof a[1] === 'string') {
+			property.value = a[1];
+			if (a[2]) property.important = true;
+		} else if (typeof a[2] === 'string') {
+			property.important = true;
+			property.value = a[2];
 		}
-		return a;
-	} else return property;
+		return property;
+	} else return a;
 };
 
-var runProperties = function(properties) {
-	var a = [];
-	for (var i = properties.length; i--; )
-		a.push(runPropertyModel(properties[i]));
-	return a;
+var runPropertiesModel = function(a) {
+	var properties = [];
+	for (var i = a.length; i--; )
+		properties.push(runPropertyModel(a[i]));
+	return properties;
 };
 
 var runRuleModel = function(a) {
@@ -31,10 +31,10 @@ var runRuleModel = function(a) {
 
 	if (a instanceof Array) {
 		rule.selector = a[0];
-		rule.properties = runProperties(a[1]);
+		rule.properties = runPropertiesModel(a[1]);
 	} else {
 		rule.selector = a.selector;
-		rule.properties = runProperties(a.properties);
+		rule.properties = runPropertiesModel(a.properties);
 	}
 
 	return rule;
@@ -62,18 +62,20 @@ var runStyleSheetModel = function(a) {
 
 	if (a instanceof Array) {
 
-		if (!(a[0] instanceof String)) {
-
+		if (!(typeof a[0] === 'string'))
 			for (var i = a.length; i--; )
 				Style.push(runScopeModel(a[i]));
-
-		} else Style.push(a);
+		else Style.push(runRuleModel(a));
 
 	} else if (a.selector) Style.push(a);
 
 	if (Style.length) return Style;
 	return false;
 
+};
+
+var buildStyleString = function(a) {
+	return false;
 };
 
 var addStyle = function(a) {
