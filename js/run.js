@@ -47,8 +47,6 @@ var styles = [];
 for (var i = ruleModel.length; i--; )
 	styles.push(runRuleModel(ruleModel[i]));
 
-//console.log(styles);
-
 addStyle(styles);
 
 /*
