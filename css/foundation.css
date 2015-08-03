@@ -1,0 +1,18 @@
+/*!
+ * Villa Foundation v3.0.0 (http://getvilla.org/)
+ * Copyright 2013-2015 Noibe Developers
+ * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
+*/
+
+h1,
+h2,
+h3,
+h4 {
+	font-size: inherit;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border: 0;
+}

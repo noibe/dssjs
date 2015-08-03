@@ -1,0 +1,39 @@
+/*!
+ * Villa UX Helper v1.0.0 (http://getvilla.org/)
+ * Copyright 2013-2015 Noibe Developers
+ * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
+*/
+
+/*
+	User Selection Helper
+*/
+
+/* User  */
+.user-unselect {
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+}
+
+/*
+    Cursor Helpers
+*/
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+/*
+	Anchors helpers
+*/
+
+a {
+	-webkit-transition:.3s;
+	-moz-transition: .3s;
+	-ms-transition: .3s;
+	-o-transition: .3s;
+	transition: .3s;
+}
