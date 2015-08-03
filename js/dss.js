@@ -39,3 +39,4 @@ var runRuleModel = function(a) {
 
 	return rule;
 };
+

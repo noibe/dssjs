@@ -193,5 +193,3 @@ styleSheetModel =
 		]
 	]
 ];
-
-console.log(styleSheetModel);
