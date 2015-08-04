@@ -93,17 +93,17 @@ var buildPropertyString = function(a) {
 };
 
 var buildRuleString = function(a) {
-		var p = a.properties,
-			s = a.selector,
-			r = '';
+	var p = a.properties,
+		s = a.selector,
+		r = '';
 
-		for (var i = p.length; i--;)
-			r += buildPropertyString(p[i]);
+	for (var i = p.length; i--;)
+		r += buildPropertyString(p[i]);
 
-		return {
-			selector: s,
-			rules: r
-		};
+	return {
+		selector: s,
+		rules: r
+	};
 };
 
 var buildScopeString = function(a) {
