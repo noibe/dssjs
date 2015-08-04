@@ -135,12 +135,12 @@ styleSheetModel =
 		properties: [
 			{
 				important: true,
-				name: 'selectorOnePropertyTwo',
+				name: 'background-color',
 				value: 'red'
 			},
 			{
-				name: 'selectorOnePropertyTwo',
-				value: 'blue'
+				name: 'background-color',
+				value: 'green'
 			}
 		]
 	},
@@ -168,7 +168,7 @@ styleSheetModel =
 					{
 						important: true,
 						name: 'background-color',
-						value: 'red'
+						value: 'green'
 					},
 					{
 						name: 'color',
@@ -179,15 +179,14 @@ styleSheetModel =
 		]
 	},
 	[
-		'selectorFour',
+		'body',
 		[
 			[
-				'selectorFourPropertyOne',
-				true,
-				'red'
+				'background-color',
+				'green'
 			],
 			[
-				'selectorFourPropertyTwo',
+				'background-color',
 				'blue'
 			]
 		]

@@ -1,5 +1,5 @@
 /*!
- * Villa DSS.JS v0.5.5 (http://getvilla.org/)
+ * Villa DSS.JS v0.8.5 (http://getvilla.org/)
  * Copyright 2013-2015 Noibe Developers
  * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
  */
@@ -47,7 +47,6 @@ var runScopeModel = function(a) {
 		if (a.type && a.rules) {
 
 			console.log('scope here');
-
 			return false;
 
 		} else return runRuleModel(a);  // is a object rule
@@ -74,11 +73,52 @@ var runStyleSheetModel = function(a) {
 
 };
 
-var buildStyleString = function(a) {
-	return false;
+var debugStyleSheet = function(a) {
+	return runStyleSheetModel(a);
 };
 
-var addStyle = function(a) {
-	console.log(runStyleSheetModel(a));
+var buildPropertyString = function(a) {
+	var s = a.name;
+	s += ': ' + a.value;
+	if (a.important) s += ' !important;'; else s+= ';';
+	return s;
+};
+
+var buildRuleString = function(a) {
+	var p = a.properties,
+		s = a.selector,
+		r = '';
+
+	for (var i = p.length; i--; )
+		r += buildPropertyString(p[i]);
+
+	return {
+		selector: s,
+		rules: r
+	};
+};
+
+var buildStyleString = function(a) {
+	var s = [];
+	for (var i = a.length; i--; )
+		if (a[i]) s.push(buildRuleString(a[i]));
+	return s;
+};
+
+var addRule = function(a) {
+	var s = document.styleSheets[0];
+	for (var i = a.length; i--; ) {
+		if ("insertRule" in s) {
+			s.insertRule(a[i].selector + ' { ' + a[i].rules + ' } ', false);
+		}
+		else if ("addRule" in s) {
+			s.addRule(a[i].selector, a[i].rules);
+		}
+	}
+};
+
+var addStyle = function(a, d) {
+	if (d) a = debugStyleSheet(a);
+	addRule(buildStyleString(a));
 };
 

@@ -11,22 +11,5 @@ var styles = [];
 
 //addStyle(styles);
 //addStyle(styleSheetModel);
-addStyle(ruleModel[1]);
 
-/*
-	InsertRule tests
- */
-
-var s = document.styleSheets[0];
-
-function addCSSRule(sheet, selector, rules, index) {
-	if ("insertRule" in sheet) {
-		sheet.insertRule(selector + "{" + rules + "}", index);
-	}
-	else if ("addRule" in sheet) {
-		sheet.addRule(selector, rules, index);
-	}
-}
-
-// Use it!
-addCSSRule(s, "body", "background-color: red");
+addStyle(styleSheetModel, true);
