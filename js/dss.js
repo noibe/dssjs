@@ -46,8 +46,16 @@ var runScopeModel = function(a) {
 
 		if (a.type && a.rules) {
 
-			console.log('scope here');
-			return false;
+			var scope = [];
+			if (a.rules instanceof Array) {
+				for (var i = a.rules.length; i--; )
+					scope.push(runRuleModel(a.rules[i]));
+				return {
+					type: a.type,
+					features: a.features,
+					rules: scope
+				};
+			}
 
 		} else return runRuleModel(a);  // is a object rule
 
@@ -85,33 +93,60 @@ var buildPropertyString = function(a) {
 };
 
 var buildRuleString = function(a) {
-	var p = a.properties,
-		s = a.selector,
-		r = '';
+		var p = a.properties,
+			s = a.selector,
+			r = '';
 
-	for (var i = p.length; i--; )
-		r += buildPropertyString(p[i]);
+		for (var i = p.length; i--;)
+			r += buildPropertyString(p[i]);
 
-	return {
-		selector: s,
-		rules: r
-	};
+		return {
+			selector: s,
+			rules: r
+		};
+};
+
+var buildScopeString = function(a) {
+	var s = '@' + a.type + ' ' + a.features + ' { ';
+
+	for (var i = a.rules.length; i--; ) {
+		var r = buildRuleString(a.rules[i]);
+		s += (r.selector + ' { ' + r.rules + ' } ');
+	}
+
+	return s + ' }';
 };
 
 var buildStyleString = function(a) {
 	var s = [];
 	for (var i = a.length; i--; )
-		if (a[i]) s.push(buildRuleString(a[i]));
+		if (!a[i].type && !a[i].rules)      // is rule model
+			s.push(buildRuleString(a[i]));
+		else {                              // is scope model
+			s.push(buildScopeString(a[i]));
+		}
 	return s;
 };
 
 var addRule = function(a) {
+	var styleEl = document.createElement('style'),
+		s;
+
+	// Append style element to head
+	document.head.appendChild(styleEl);
+
+	// Grab style sheet
+	s = styleEl.sheet;
+
 	var s = document.styleSheets[0];
 	for (var i = a.length; i--; ) {
-		if ("insertRule" in s) {
-			s.insertRule(a[i].selector + ' { ' + a[i].rules + ' } ', false);
-		}
-		else if ("addRule" in s) {
+		if (typeof a[i] === 'string') {
+			if ("insertRule" in s) {    // adding scope
+				s.insertRule(a[i], 0);
+			}
+		} else if ("insertRule" in s) {
+			s.insertRule(a[i].selector + ' { ' + a[i].rules + ' } ', 0);
+		} else if ("addRule" in s) {
 			s.addRule(a[i].selector, a[i].rules);
 		}
 	}

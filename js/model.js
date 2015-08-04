@@ -128,67 +128,105 @@ scopeModel.push(
 	}
 );
 
-styleSheetModel =
-[
-	{
-		selector: 'selectorOne',
-		properties: [
-			{
-				important: true,
-				name: 'background-color',
-				value: 'red'
-			},
-			{
-				name: 'background-color',
-				value: 'green'
-			}
-		]
-	},
-	{
-		type: 'media',
-		features: '(max-width: 600px)',
-		rules: [
-			[
-				'selectorTwo',
-				[
-					[
-						'background-color',
-						true,
-						'red'
-					],
-					[
-						'color',
-						'blue'
-					]
-				]
-			],
-			{
-				selector: 'selectorThree',
-				properties: [
-					{
-						important: true,
-						name: 'background-color',
-						value: 'green'
-					},
-					{
-						name: 'color',
-						value: 'blue'
-					}
-				]
-			}
-		]
-	},
+styleSheetModel = [];
+
+styleSheetModel.push (
 	[
-		'body',
+		{
+			selector: 'selectorOne',
+			properties: [
+				{
+					important: true,
+					name: 'background-color',
+					value: 'red'
+				},
+				{
+					name: 'background-color',
+					value: 'green'
+				}
+			]
+		},
+		{
+			type: 'media',
+			features: '(max-width: 600px)',
+			rules: [
+				[
+					'body',
+					[
+						[
+							'background-color',
+							true,
+							'red'
+						],
+						[
+							'color',
+							'blue'
+						]
+					]
+				],
+				{
+					selector: 'body',
+					properties: [
+						{
+							important: true,
+							name: 'color',
+							value: 'green'
+						},
+						{
+							name: 'color',
+							value: 'blue'
+						}
+					]
+				}
+			]
+		},
 		[
+			'body',
 			[
-				'background-color',
-				'green'
-			],
-			[
-				'background-color',
-				'blue'
+				[
+					'background-color',
+					'green'
+				],
+				[
+					'background-color',
+					'blue'
+				]
 			]
 		]
 	]
-];
+);
+
+styleSheetModel.push(
+	[
+		{
+			selector: '.a',
+			properties: [
+				{
+					important: true,
+					name: 'color',
+					value: 'red'
+				},
+				{
+					name: 'background-color',
+					value: 'green'
+				}
+			]
+		},
+		{
+			type: 'media',
+			features: 'only screen and (max-width: 600px)',
+			rules: [
+				{
+					selector: '.a',
+					properties: [
+						{
+							name: 'background-color',
+							value: 'yellow'
+						}
+					]
+				}
+
+			]
+		}
+	]
+);

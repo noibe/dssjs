@@ -12,4 +12,4 @@ var styles = [];
 //addStyle(styles);
 //addStyle(styleSheetModel);
 
-addStyle(styleSheetModel, true);
+addStyle(styleSheetModel[1], true);
