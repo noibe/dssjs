@@ -1,5 +1,5 @@
 /*!
- * Villa DSS.JS v0.8.5 (http://getvilla.org/)
+ * Villa DSS.JS v0.9.9 (http://getvilla.org/)
  * Copyright 2013-2015 Noibe Developers
  * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
  */
@@ -69,7 +69,7 @@ var runStyleSheetModel = function(a) {
 
 	if (a instanceof Array) {
 
-		if (!(typeof a[0] === 'string'))
+		if (typeof a[0] !== 'string')
 			for (var i = a.length; i--; )
 				Style.push(runScopeModel(a[i]));
 		else Style.push(runRuleModel(a));
@@ -129,26 +129,22 @@ var buildStyleString = function(a) {
 };
 
 var addRule = function(a) {
-	var styleEl = document.createElement('style'),
-		s;
+	var style = document.createElement('style'),
+		head = document.head || document.getElementsByTagName("head")[0],   // ie8 hack
+		sheet;
 
 	// Append style element to head
-	document.head.appendChild(styleEl);
+	head.appendChild(style);
 
 	// Grab style sheet
-	s = styleEl.sheet;
+	sheet = style.sheet || document.styleSheets[0];     // ie8 hack
 
-	var s = document.styleSheets[0];
 	for (var i = a.length; i--; ) {
-		if (typeof a[i] === 'string') {
-			if ("insertRule" in s) {    // adding scope
-				s.insertRule(a[i], 0);
-			}
-		} else if ("insertRule" in s) {
-			s.insertRule(a[i].selector + ' { ' + a[i].rules + ' } ', 0);
-		} else if ("addRule" in s) {
-			s.addRule(a[i].selector, a[i].rules);
-		}
+		if ("insertRule" in sheet)
+			if (typeof a[i] === 'string') sheet.insertRule(a[i], 0);
+			else sheet.insertRule(a[i].selector + ' { ' + a[i].rules + ' } ', 0);
+		else if ("addRule" in sheet)
+			sheet.addRule(a[i].selector, a[i].rules);
 	}
 };
 

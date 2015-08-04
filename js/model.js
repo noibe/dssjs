@@ -1,5 +1,5 @@
 /*!
- * Villa DSS.JS Model v0.9.0 (http://getvilla.org/)
+ * Villa DSS.JS Model v1.0.0 (http://getvilla.org/)
  * Copyright 2013-2015 Noibe Developers
  * Licensed under MIT (https://github.com/noibe/villa/blob/master/LICENSE)
  */

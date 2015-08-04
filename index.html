@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fira-sans fira-mono">
 <head>
 	<meta charset="UTF-8">
 	<title>DSS.js</title>
-	<!--<script src="dist/js/villa.min.js"></script>-->
+	<script src="dist/js/villa.min.js"></script>
 	<script src="js/dss.js"></script>
 	<link rel="stylesheet" href="dist/css/villa.min.css"/>
 	<!--[if lt IE 9]>
@@ -16,10 +16,274 @@
 </head>
 <body>
 
-<div class="a">oi</div>
+<style scoped="scoped">
+
+	pre {
+		tab-size: 0;
+	}
+
+</style>
+
+<main>
+
+	<header class="flex align-center flex-column">
+
+		<h1>DSS.JS Introduction</h1>
+
+		<p>Dynamic Style Sheets</p>
+
+	</header>
+
+	<section>
+
+		<h2>Using</h2>
+
+		<p>To use the DSS.JS, download the dss.js and put the stylesheet object array to <em>addStyle()</em> function:</p>
+
+		<div class="code">
+	<pre><code>addStyle(styleObject, true);</code></pre>
+		</div>
+
+	</section>
+
+	<section>
+
+		<h2>Rule Model (object)</h2>
+
+		<div class="code">
+			<pre><code>{
+	selector: 'body',
+	properties: [
+		{
+			important: true,
+			name: 'color',
+			value: 'green'
+		},
+		{
+			name: 'color',
+			value: 'blue'
+		}
+	]
+}</code></pre>
+		</div>
+
+	</section>
+
+	<section>
+
+		<h2>Rule Model (array alternative)</h2>
+
+		<div class="code">
+			<pre><code>[
+	'body',
+	[
+		[
+			'background-color',
+			'red',
+			true
+		],
+		[
+			'color',
+			'blue'
+		]
+	]
+]</code></pre>
+		</div>
+
+	</section>
+
+	<section>
+
+		<h2>Scopes</h2>
+
+		<div class="code">
+			<pre><code>{
+	type: 'media',
+	features: '(max-width: 600px)',
+	rules: [
+		[
+			'body',
+			[
+				[
+					'background-color',
+					'red',
+					true
+				],
+				[
+					'color',
+					'blue'
+				]
+			]
+		],
+		{
+			selector: 'body',
+			properties: [
+				{
+					important: true,
+					name: 'color',
+					value: 'green'
+				},
+				{
+					name: 'color',
+					value: 'blue'
+				}
+			]
+		}
+	]
+}</code></pre>
+		</div>
+
+	</section>
+
+	<section>
+
+		<h2>Stylesheet</h2>
+
+		<div class="code">
+			<pre><code>[
+	{
+		selector: 'body',
+		properties: [
+			{
+				important: true,
+				name: 'color',
+				value: 'green'
+			},
+			{
+				name: 'color',
+				value: 'blue'
+			}
+		]
+	},
+	[
+		'body',
+		[
+			[
+				'background-color',
+				'red',
+				true
+			],
+			[
+				'color',
+				'blue'
+			]
+		]
+	],
+	{
+		type: 'media',
+		features: '(max-width: 600px)',
+		rules: [
+			[
+				'body',
+				[
+					[
+						'background-color',
+						'red',
+						true
+					],
+					[
+						'color',
+						'blue'
+					]
+				]
+			],
+			{
+				selector: 'body',
+				properties: [
+					{
+						important: true,
+						name: 'color',
+						value: 'green'
+					},
+					{
+						name: 'color',
+						value: 'blue'
+					}
+				]
+			}
+		]
+	}
+]</code></pre>
+		</div>
+
+	</section>
+
+</main>
 
 <script src="js/model.js"></script>
 <script src="js/run.js"></script>
+
+<script>
+	var main, typo, code;
+
+	main = [
+		{
+			selector: 'main',
+			properties: [
+				{
+					name: 'margin',
+					value: '0 auto'
+				},
+				{
+					name: 'width',
+					value: '48em'
+				}
+			]
+		}
+	];
+
+	typo = [
+		{
+			selector: 'h1, h2, h3',
+			properties: [
+				{
+					name: 'font-weight',
+					value: '100'
+				}
+			]
+		},
+		{
+			selector: 'h2',
+			properties: [
+				{
+					name: 'margin-bottom',
+					value: '.5em'
+				}
+			]
+		},
+		{
+			selector: 'p',
+			properties: [
+				{
+					name: 'margin-bottom',
+					value: '1em'
+				}
+			]
+		}
+	];
+
+	code = {
+		selector: '.code',
+		properties: [
+			{
+				name: 'background-color',
+				value: '#dddddd'
+			},
+			{
+				name: 'margin-bottom',
+				value: '1em'
+			}
+		]
+	};
+
+	var styles = [
+			code
+	];
+
+	addStyle(main, true);
+	addStyle(typo, true);
+	addStyle(styles, true);
+</script>
 
 </body>
 </html>

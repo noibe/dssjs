@@ -5,21 +5,12 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	uglify = require('gulp-uglify');
 
-var cssFiles = 'css/*.css',
-	jsFiles = 'js/*.js';
+var paths = {
+	core: 'js/dss.js'
+};
 
-gulp.task('css', function() {
-	gulp.src(cssFiles)
-		.pipe(minifycss())
-		.pipe(concat('villa.css'))
-		.pipe(rename({
-			extname: '.min.css'
-		}))
-		.pipe(gulp.dest('dist/css'));
-});
-
-gulp.task('js', function() {
-	gulp.src(jsFiles)
+gulp.task('dss', function() {
+	gulp.src(paths.core)
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(uglify({
@@ -31,7 +22,8 @@ gulp.task('js', function() {
 		.pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('default', function() {
-	var villa = ['css', 'js'];
-	gulp.watch(villa);
+gulp.task('watch', function() {
+	gulp.watch(paths.core, ['dss']);
 });
+
+gulp.task('default', ['watch', 'dss']);
